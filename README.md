@@ -23,3 +23,6 @@
 - [finch](https://github.com/ropensci/finch)
 
 ## Introduction to R
+
+Work in progress.
+
