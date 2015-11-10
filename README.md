@@ -3,7 +3,7 @@
 ## Marine Biogeographic Data Management<br/>(contributing and using OBIS)
 ### Course content
 
-- [Continue here](https://github.com/iobis/training/wiki)
+[Continue here](https://github.com/iobis/training/wiki)
 
 ### Recommended software
 
