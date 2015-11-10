@@ -8,7 +8,7 @@
 ### Recommended software
 
 - [R](https://www.r-project.org/)
-- [R Studio](https://www.rstudio.com/)
+- [RStudio](https://www.rstudio.com/)
 - [pgAdmin](http://www.pgadmin.org/)
 - [QGIS](http://www.qgis.org/)
 - [IPT](http://www.gbif.org/ipt)
@@ -21,3 +21,5 @@
 ### R packages
 
 - [finch](https://github.com/ropensci/finch)
+
+## Introduction to R
