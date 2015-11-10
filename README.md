@@ -4,6 +4,6 @@
 
 There are several ways to access OBIS data:
 
-- [Mapper](mapper)
+- [Mapper](mapper.md)
 - [Webservices](Webservices)
 - [Database](Database)
