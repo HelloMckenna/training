@@ -20,6 +20,7 @@ Continue [here](https://github.com/iobis/training/wiki) to see the course conten
 - [Darwin Core Archive Validator](http://tools.gbif.org/dwca-validator/)
 - [geojson.io](http://geojson.io/)
 - [Wicket](http://arthur-e.github.io/Wicket/sandbox-gmaps3.html)
+- [iobis.github.io](http://iobis.github.io/)
 
 #### R packages
 
