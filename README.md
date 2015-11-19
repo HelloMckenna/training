@@ -13,12 +13,15 @@ Continue [here](https://github.com/iobis/training/wiki) to see the course conten
 - [QGIS](http://www.qgis.org/)
 - [IPT](http://www.gbif.org/ipt)
 
-### Online tools
+#### Online tools
 
 - [CartoDB](https://cartodb.com/)
 - [ArcGIS Online](https://www.arcgis.com/home/)
+- [Darwin Core Archive Validator](http://tools.gbif.org/dwca-validator/)
+- [geojson.io](http://geojson.io/)
+- [Wicket](http://arthur-e.github.io/Wicket/sandbox-gmaps3.html)
 
-### R packages
+#### R packages
 
 - [finch](https://github.com/ropensci/finch)
 
