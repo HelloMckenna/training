@@ -18,7 +18,10 @@ Continue [here](https://github.com/iobis/training/wiki).
 - [Darwin Core Archive Validator](http://tools.gbif.org/dwca-validator/)
 - [geojson.io](http://geojson.io/)
 - [Wicket](http://arthur-e.github.io/Wicket/sandbox-gmaps3.html)
-- [finch](https://github.com/ropensci/finch)
 - [iobis.github.io](http://iobis.github.io/)
 
+#### R packages
+
+- [finch](https://github.com/ropensci/finch)
+- [leaflet](https://rstudio.github.io/leaflet)
 
