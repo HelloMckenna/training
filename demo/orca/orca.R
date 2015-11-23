@@ -1,4 +1,5 @@
 require(RPostgreSQL)
+require(leaflet)
 
 host <- "obisdb-stage.vliz.be"
 db <- "obis"
@@ -15,7 +16,7 @@ valid_path <- paste0("'", valid_taxon$storedpath[1], valid_taxon$valid_id[1], "x
 
 data <- dbGetQuery(con, paste0("select p.* from portal.points_ex p left join obis.tnames t on p.valid_id = t.id where t.id = ", valid_id, " or t.storedpath like ", valid_path))
 
-# visualize
+# ggplot2
 
 require(mapdata)
 require(ggplot2)
@@ -28,3 +29,16 @@ g <- ggplot(world, aes(long, lat)) +
 
 g + geom_point(data=data, aes(x=longitude, y=latitude, colour=monthcollected)) +
   scale_colour_gradientn(colours=c("#7ED5C8", "#F2D391", "#EF6E4A"))
+
+# leaflet
+
+column <- "monthcollected"
+colors <- heat.colors(max(data[[column]], na.rm=TRUE) - min(data[[column]], na.rm=TRUE) + 1)[data[[column]] - min(data[[column]], na.rm=TRUE) + 1]
+colors <- substr(colors, 1, 7)
+colors[is.na(colors)] <- "#aaaaaa"
+
+m <- leaflet()
+m <- addProviderTiles(m, "CartoDB.Positron")
+m <- addCircleMarkers(m, data=data.frame(lat=data$latitude, lng=data$longitude), radius=3, weight=0, fillColor=colors, fillOpacity=0.5)
+m
+
