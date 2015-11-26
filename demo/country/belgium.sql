@@ -1,7 +1,7 @@
 ﻿with eezs as (
-    select id, eez, country, sovereign
-    from geo.eezs
-    where country like '%Belgium%' -- also try eez or sovereign
+	select id, eez, country, sovereign
+	from geo.eezs
+	where country like '%Belgium%' -- also try eez or sovereign
 )
 select 
 	tr30.tname as phylum,
