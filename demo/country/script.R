@@ -24,3 +24,20 @@ cat("Number of species:", species)
 cat("Number of phyla:", phyla)
 cat("Number of years:", years)
 cat("Number of datasets:", datasets)
+
+# Custom taxonomic groups
+
+groups <- c("Nematoda", "Bivalvia", "Gastropoda")
+
+data$group <- "Other"
+classification <- apply(data[,c("phylum", "class", "order", "family")], 1, paste, collapse=";")
+matches <- sapply(groups, function(x) { grep(x, classification) })
+for (g in groups) {
+  data$group[matches[[g]]] <- g
+}
+
+palette <- brewer.pal(length(groups) + 1, "Paired")
+ggplot() +
+  geom_histogram(data=data, aes(x=year, fill=group), binwidth=1) +
+  scale_fill_manual(values=palette)
+
