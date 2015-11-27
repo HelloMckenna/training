@@ -24,4 +24,5 @@ Continue [here](https://github.com/iobis/training/wiki). Work in progress.
 
 - [finch](https://github.com/ropensci/finch)
 - [leaflet](https://rstudio.github.io/leaflet)
+- [worms](https://github.com/pieterprovoost/worms)
 
