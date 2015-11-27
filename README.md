@@ -7,7 +7,7 @@ Continue [here](https://github.com/iobis/training/wiki). Work in progress.
 
 ### Presentations
 
-[Darwin Core](http://iobis.github.io/presentation/darwincore/) Work in progress.
+- [Darwin Core](http://iobis.github.io/presentation/darwincore/)
 
 ### Recommended software 
 
