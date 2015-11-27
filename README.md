@@ -5,6 +5,10 @@
 
 Continue [here](https://github.com/iobis/training/wiki). Work in progress.
 
+### Presentations
+
+[Darwin Core](http://iobis.github.io/presentation/darwincore/) Work in progress.
+
 ### Recommended software 
 
 - [R](https://www.r-project.org/)
