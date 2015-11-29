@@ -22,7 +22,8 @@ h4 {
 	margin-bottom: 0.8em;
 }
 .remark-code, .remark-inline-code {
-	font-family: 'Ubuntu Mono';
+  font-family: 'Ubuntu Mono';
+  color: #cc3300;
 }
 a {
 	color: #3399ff;
@@ -54,8 +55,11 @@ https://github.com/iobis/training/wiki
 # Darwin Core
 
 - [Darwin Core](http://rs.tdwg.org/dwc/) is a body of standards for biodiversity informatics.
-- It provides stable [terms](http://rs.tdwg.org/dwc/terms/) and vocubularies for sharing biodiversity data.
 - Darwin Core is maintained by [TDWG](http://tdwg.org/) (Biodiversity Information Standards, formerly The International Working Group on Taxonomic Databases).
+- It provides stable [terms](http://rs.tdwg.org/dwc/terms/) and vocubularies for sharing biodiversity data.
+- Terms have definitions to promote consistent use across applications.
+- The [OBIS schema](http://iobis.org/node/304) was based on [Simple Darwin Core](http://rs.tdwg.org/dwc/terms/simple/), a subset of Darwin Core which does not allow any structure beyond rows and columns. It added some terms which were important for OBIS but not supported by Darwin Core at the time.
+- OBIS is now transitioning to Darwin Core.
 
 ---
 
@@ -71,7 +75,7 @@ https://github.com/iobis/training/wiki
 
 #### basisOfRecord
 
-This term is required. Possible values are `PreservedSpecimen`, `FossilSpecimen`, `LivingSpecimen`, `HumanObservation`, and `MachineObservation`.
+This term is required in Darwin Core Archive occurrence records. Possible values are `PreservedSpecimen`, `FossilSpecimen`, `LivingSpecimen`, `HumanObservation`, and `MachineObservation`. Examples of machine observations are satellite tracking or continuous plankton recorder datasets.
 
 #### institutionCode
 
@@ -110,7 +114,7 @@ institutionCode   collectionCode   catalogNumber   occurrenceID
 
 #### scientificNameID
 
-A [WoRMS](http://www.marinespecies.org/) LSID should be added in `scientificNameID`, OBIS will use this identifier to link the record to the accepted taxonomic name.
+A [WoRMS](http://www.marinespecies.org/) LSID should be added in `scientificNameID`. OBIS will use this identifier to link the record to the accepted taxonomic name.
 
 #### scientificNameAuthorship
 
@@ -122,7 +126,7 @@ We recommend to not include authorship in `scientificName`, and only use `scient
 
 #### identificationQualifier
 
-Identification qualifiers, such as cf. or aff. should go in `identificationQualifier`.
+Identification qualifiers (such as cf. or aff.) should go in `identificationQualifier`.
 
 #### kingdom, taxonRank
 
@@ -144,11 +148,24 @@ Lanice conchilega               Pallas, 1766 urn:lsid:marinespecies.org:taxname:
 
 #### organismQuantity
 
-A few terms related to quantity, organismQuantity and organismQuantityType, have been recently added to Darwin Core. This is a lot more versatile than the older individualCount field. organismQuantity should contain the the quantity value. 
+A few terms related to quantity, `organismQuantity` and `organismQuantityType`, have been recently added to Darwin Core. This is a lot more versatile than the older `individualCount` field. `organismQuantity` should contain the the quantity value. 
 
 #### organismQuantityType
 
-`organismQuantityType` contains the parameter and units. There is a [recommended vocabulary](http://rs.gbif.org/vocabulary/gbif/quantity_type_2015-07-10.xml) for organismQuantityType which includes values such as individuals, biomassAFDG (biomass ash free dry weight in gram), percentageOfBiomass and percentageCoverage. The quantity terms should be used together with the new sample size related fields.
+`organismQuantityType` contains the parameter and units. There is a [recommended vocabulary](http://rs.gbif.org/vocabulary/gbif/quantity_type_2015-07-10.xml) for `organismQuantityType` which includes values such as `individuals`, `biomassAFDG` (biomass ash free dry weight in gram), `percentageOfBiomass` and `percentageCoverage`. The quantity terms should be used together with the new sample size related fields.
+
+---
+
+# Occurrence
+
+```xml
+eventID     scientificName   occurrenceStatus   organismQuantity   organismQuantityType 
+------- ------------------ ------------------ ------------------ ---------------------- 
+      1          Abra alba            present                 12              organisms 
+      1  Pectinaria koreni            present                 48              organisms 
+      2          Abra alba             absent                  0              organisms 
+      2  Pectinaria koreni            present                 48              organisms 
+```
 
 ---
 
@@ -160,7 +177,7 @@ A few terms related to quantity, organismQuantity and organismQuantityType, have
 
 #### sex
 
-The recommended vocabulary for sex can be found [here](http://rs.gbif.org/vocabulary/gbif/sex.xml).
+The recommended vocabulary for `sex` can be found [here](http://rs.gbif.org/vocabulary/gbif/sex.xml).
 
 #### lifeStage
 
@@ -186,7 +203,7 @@ Recommended best practice is use the [EPSG code](https://www.epsg-registry.org/)
 
 #### footprintWKT
 
-A [Well-Known Text](https://en.wikipedia.org/wiki/Well-known_text) (WKT) representation of the shape of the location can be provided in footprintWKT. This is particularly useful for tracks, transects, tows, trawls, or when an exact location is not known.
+A [Well-Known Text](https://en.wikipedia.org/wiki/Well-known_text) (WKT) representation of the shape of the location can be provided in `footprintWKT`. This is particularly useful for tracks, transects, tows, trawls, or when an exact location is not known.
 
 Examples:
 
@@ -221,9 +238,41 @@ This contains the source of a locality name. This can for example be a gazetteer
 
 ---
 
+# Location
+### Common problems
+
+- coordinates in degrees/minutes/seconds
+- coordinates containing north/east/south/west
+- longitude and latitude swapped
+- zero longitude and latitude
+- coordinates on land (not necessarily a problem)
+- longitude outside -180°/180°, latitude outside -90°/90°
+
+---
+
+# Location
+### Common problems
+
+- negative depth
+- `minimumDepthInMeters` > `maximumDepthInMeters`
+- `maximumDepthInMeters` > bathymetric depth
+- depth not in meters
+
+---
+
+# Location
+### Solution
+
+- plot your points on a [map](http://iobis.github.io/dwca/)!
+- explore your data
+<p class="center"><img src="acartia.png" width="90%" /></p>
+
+
+---
+
 # Time
 
-<p class="center"><img src="https://camo.githubusercontent.com/b4f27a2ff22f7b9589a973a63c6d126182aeb519/68747470733a2f2f696d67732e786b63642e636f6d2f636f6d6963732f69736f5f383630312e706e67"/></p>
+<p class="center"><img src="public.png"/></p>
 
 ---
 
@@ -243,6 +292,11 @@ Some examples:
 1948-09-13
 1993-01/02
 ```
+
+---
+
+# Time
+### Common problems
 
 ---
 
