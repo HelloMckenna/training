@@ -45,6 +45,11 @@ class: center, middle
 # Biodiversity data standards:<br/>Darwin Core
 
 ---
+class: middle, center
+
+<p class="center"><img src="standards.png" width="70%"/></p>
+
+---
 
 ## Read more:
 
@@ -114,7 +119,7 @@ institutionCode   collectionCode   catalogNumber   occurrenceID
 
 #### scientificNameID
 
-A [WoRMS](http://www.marinespecies.org/) LSID should be added in `scientificNameID`. OBIS will use this identifier to link the record to the accepted taxonomic name.
+A [WoRMS](http://www.marinespecies.org/) [LSID](https://en.wikipedia.org/wiki/LSID) should be added in `scientificNameID`. OBIS will use this identifier to link the record to the accepted taxonomic name.
 
 #### scientificNameAuthorship
 
@@ -179,7 +184,15 @@ eventID     scientificName   occurrenceStatus   organismQuantity   organismQuant
 
 The recommended vocabulary for `sex` can be found [here](http://rs.gbif.org/vocabulary/gbif/sex.xml).
 
+<p class="center"><img src="sex_1.png" width="47%" /> <img src="sex_2.png" width="47%" /></p>
+
+---
+
+# Occurrence
+
 #### lifeStage
+
+<p class="center"><img src="lifestage.png" width="47%" /> <img src="lifestage_2.png" width="47%" /></p>
 
 ---
 
@@ -235,6 +248,19 @@ This should be the depth at which the sample was taken, not the water column dep
 This contains the source of a locality name. This can for example be a gazetteer such as [Marine Regions](http://www.marineregions.org/).
 
 <br/><p class="center"><img src="gazetteer.png" width="90%"/></p>
+
+---
+
+# Location
+
+#### contintent
+#### waterBody
+#### islandGroup
+#### island
+#### country
+#### stateProvince
+#### county
+#### municipality
 
 ---
 
@@ -296,6 +322,8 @@ This contains the source of a locality name. This can for example be a gazetteer
 #### eventDate
 
 The date and time at which an occurrence was recorded goes in `eventDate`. This terms uses the [ISO 8601 standard](https://en.wikipedia.org/wiki/ISO_8601).
+
+<p class="center"><img src="iso.jpg" width="50%"/></p>
 
 Some examples:
 
@@ -370,6 +398,7 @@ Recommended best practice is to use [SI units](https://en.wikipedia.org/wiki/Int
 - Darwin Core Archive (DwC-A) is a biodiversity informatics data standard that makes use of the Darwin Core terms to produce a single, self-contained dataset.
 - Collection of text and xml files.
 - Metadata in [Ecological Metadata Language](https://en.wikipedia.org/wiki/Ecological_Metadata_Language) (EML).
+- Can be served through the [GBIF Integrated Publishing Toolkit](http://www.gbif.org/ipt) (IPT).
 
 ---
 
