@@ -264,6 +264,21 @@ This contains the source of a locality name. This can for example be a gazetteer
 ### Solution
 
 - plot your points on a [map](http://iobis.github.io/dwca/)!
+<p class="center"><img src="tuna_before.png" width="90%" /></p>
+
+---
+
+# Location
+### Solution
+
+- plot your points on a [map](http://iobis.github.io/dwca/)!
+<p class="center"><img src="tuna_after.png" width="90%" /></p>
+
+---
+
+# Location
+### Solution
+
 - explore your data
 <p class="center"><img src="acartia.png" width="90%" /></p>
 
@@ -292,11 +307,6 @@ Some examples:
 1948-09-13
 1993-01/02
 ```
-
----
-
-# Time
-### Common problems
 
 ---
 
@@ -357,13 +367,25 @@ Recommended best practice is to use [SI units](https://en.wikipedia.org/wiki/Int
 
 # Darwin Core Archive
 
+- Darwin Core Archive (DwC-A) is a biodiversity informatics data standard that makes use of the Darwin Core terms to produce a single, self-contained dataset.
+- Collection of text and xml files.
+- Metadata in [Ecological Metadata Language](https://en.wikipedia.org/wiki/Ecological_Metadata_Language) (EML).
+
+---
+
+# Darwin Core Archive
+
 <p class="center"><img src="dwca_1.png" width="80%"/></p>
+
+[Example: 70 samples data of Kiel Bay](http://ipt.vliz.be/eurobis/resource?r=kielbay70)
 
 ---
 
 # Darwin Core Archive
 
 <p class="center"><img src="dwca_2.png" width="80%"/></p>
+
+[Example: A study of the nematode fauna of three estuaries in the Netherlands](http://ipt.vliz.be/eurobis/resource?r=manuela_uy)
 
 ---
 
@@ -425,6 +447,26 @@ Recommended best practice is to use [SI units](https://en.wikipedia.org/wiki/Int
 # Darwin Core Archive
 ### Metadata (eml.xml)
 
+```xml
+<eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1"
+  xmlns:dc="http://purl.org/dc/terms/"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 http://rs.gbif.org/schema/eml-gbif-profile/1.1/eml.xsd"
+  packageId="http://ipt.vliz.be/eurobis/resource?id=manuela_uy/v1.1" system="http://gbif.org" scope="system"
+  xml:lang="en">
+
+<dataset>
+  <alternateIdentifier>http://ipt.vliz.be/eurobis/resource?r=manuela_uy</alternateIdentifier>
+  <title xml:lang="en">A study of the nematode fauna of three estuaries in the Netherlands</title>
+  <creator>
+    <organizationName>Universiteit Gent; Faculteit Wetenschappen; Vakgroep Biologie Onderzoeksgroep Mariene Biologie</organizationName>
+    <electronicMailAddress>isolde.degrem@ugent.be</electronicMailAddress>
+  </creator>
+  <metadataProvider>
+    <individualName>
+      <givenName>EurOBIS</givenName>
+      <surName>Data Management Team</surName>
+```
 
 </textarea>
 <script src="https://gnab.github.io/remark/downloads/remark-latest.min.js">
