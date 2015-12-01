@@ -486,33 +486,63 @@ ggplot() +
 ---
 
 # Data processing: R (1)
+### Goal
 
+The goal of this example is to visualize killer whale distribution and migration.
 
+<p class="center"><img src="processing.png" width="60%" /></p>
 
+---
 
+# Data processing: R (1)
 
+```R
+require(ggplot2)
+require(mapdata)
+require(lubridate)
 
+data <- read.csv(url("https://raw.githubusercontent.com/iobis/training/master/demo/orca/orca_mapper.csv"), stringsAsFactors=FALSE)
+data$date <- parse_date_time(data$datecollected, "Y%m%d%")
+data$month <- month(data$date)
 
+world <- map_data(map="world")
 
+ggplot(world, aes(long, lat)) +
+  geom_polygon(aes(group=group), fill="gray90", color="gray90") +
+  theme(panel.background=element_blank()) +
+  coord_fixed(ratio=1) +
+  geom_point(data=data, aes(x=longitude, y=latitude, colour=month)) +
+  scale_colour_gradientn(colours=c("#7ED5C8", "#F2D391", "#EF6E4A"))
+ ```
 
+---
 
+# Data processing: R (1)
 
+<p class="center"><img src="orca.png" width="100%" /></p>
 
+---
 
+# Data processing: R (1)
 
+```R
+require(leaflet)
 
+colors <- heat.colors(12)[data$month]
+colors <- substr(colors, 1, 7)
+colors[is.na(colors)] <- "#aaaaaa"
 
+m <- leaflet()
+m <- addProviderTiles(m, "CartoDB.Positron")
+m <- addCircleMarkers(m, data=data.frame(lat=data$latitude, lng=data$longitude), radius=3, weight=0, fillColor=colors, fillOpacity=0.5)
+m
+```
 
+---
 
+# Data processing: R (1)
 
-
-
-
-
-
-
-
-
+<p class="center"><img src="leaflet.png" width="100%" /></p>
 
 
 
@@ -521,14 +551,6 @@ class: center, middle
 
 # DIY
 
----
-
-# DIY
-
-Some ieas:
-
-- 
-- 
 
 
 
