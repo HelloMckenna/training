@@ -103,3 +103,24 @@ ggplot() + geom_point(data = afil, aes(lon, lat, size = n, colour = depth)) +
   coord_fixed(ratio = 1) +
   scale_size(range = c(2, 12))
 
+# mapping
+
+require(leaflet)
+
+data <- occurrence("Verruca stroemia")
+
+qcflag <- function(qc, number) {
+  mask <- 2^(number-1)
+  return(sapply(qc, function(x) {
+    return(sum(bitwAnd(x, mask) > 0))
+  }))
+}
+
+data$qcnum <- qcflag(data$qc, c(24, 28))
+
+colors <- c("red", "orange", "green")[data$qcnum + 1]
+
+m <- leaflet()
+m <- addProviderTiles(m, "CartoDB.Positron")
+m <- addCircleMarkers(m, data=data.frame(lat=data$decimalLatitude, lng=data$decimalLongitude), radius=3, weight=0, fillColor=colors, fillOpacity=0.5)
+m
