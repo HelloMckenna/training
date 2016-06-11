@@ -1,23 +1,73 @@
-# rfishbase
+require(dplyr)
+require(parsnip)
+require(ggplot2)
+require(leaflet)
+require(landr)
 
-require(rfishbase)
-common_to_sci("cod")
-View(species("Clupea harengus"))
+data <- read.csv("EMBOS_softsubBeach_Dirty.csv", sep="\t", stringsAsFactors = FALSE, na.strings = "")
+original <- data
 
-# rgbif
+# inspect data
 
-require(rgbif)
-cluhar <- occ_search(scientificName = "Clupea harengus", limit = 50)
-View(cluhar$data)
+str(data)
+tbl_df(data)
+names(data)
 
-# spocc
+count_na <- function(x) { return(sum(is.na(x))) }
+data %>% summarise_each(funs(count_na))
 
-require(spocc)
-setcae <- occ(query = "Setophaga caerulescens", from = c("gbif", "ebird"))
-head(occ2df(setcae))
-tail(occ2df(setcae))
+# problem: ranges
 
-# rredlist
+summary(data)
+data %>% summarise_each(funs(min, max))
+hist(data$samplingElevation)
 
-require(rredlist)
-rl_search("Ursus maritimus", key = NULL)
+# problem: field names
+
+required <- c("eventDate", "decimalLatitude", "decimalLongitude", "scientificName", "scientificNameID", "occurrenceStatus", "basisOfRecord")
+required[!required %in% names(data)]
+
+data <- data %>%
+  rename(
+    scientificName = taxonName,
+    decimalLatitude = lat,
+    decimalLongitude = long
+  )
+
+data$occurrenceStatus <- "present"
+data$basisOfRecord <- "HumanObservation"
+
+# problem: coordinate format
+
+as.numeric(data$decimalLatitude)
+as.numeric(data$decimalLongitude)
+
+lat <- parsedms(data$decimalLatitude)$lat
+lon <- parsedms(data$decimalLongitude)$lon
+data$decimalLatitude <- as.numeric(data$decimalLatitude)
+data$decimalLongitude <- as.numeric(data$decimalLongitude)
+data$decimalLatitude[!is.na(lat)] <- lat[!is.na(lat)]
+data$decimalLongitude[!is.na(lon)] <- lon[!is.na(lon)]
+
+stations <- data %>% distinct(decimalLatitude, decimalLongitude) 
+
+m <- leaflet()
+m <- addProviderTiles(m, "CartoDB.Positron")
+m <- addCircleMarkers(m, ~decimalLongitude, ~decimalLatitude, data = stations, radius = 5, fillColor = "#cc3300", weight = 0, fillOpacity = 1)
+m
+
+# problem: points on land
+
+stations$distance <- land(stations$decimalLongitude, stations$decimalLatitude)
+stations$color <- c("green", "red")[(stations$distance > 0.01) + 1]
+
+m <- leaflet()
+m <- addProviderTiles(m, "CartoDB.Positron")
+m <- addCircleMarkers(m, ~decimalLongitude, ~decimalLatitude, data = stations, radius = 5, weight = 0, fillOpacity = 1, fillColor =~ color)
+m
+
+data <- left_join(data, stations %>% select(decimalLongitude, decimalLatitude, distance), by = c("decimalLongitude", "decimalLatitude"))
+
+#
+
+plot(data$sampledSedimentDepth)
