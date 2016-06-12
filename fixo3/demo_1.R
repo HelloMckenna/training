@@ -122,5 +122,5 @@ colors <- c("red", "orange", "green")[data$qcnum + 1]
 
 m <- leaflet()
 m <- addProviderTiles(m, "CartoDB.Positron")
-m <- addCircleMarkers(m, data=data.frame(lat=data$decimalLatitude, lng=data$decimalLongitude), radius=3, weight=0, fillColor=colors, fillOpacity=0.5)
+m <- addCircleMarkers(m, data = data.frame(lat = data$decimalLatitude, lng = data$decimalLongitude), radius = 3, weight = 0, fillColor = colors, fillOpacity = 0.5)
 m

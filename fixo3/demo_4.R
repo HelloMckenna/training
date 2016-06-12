@@ -1,9 +1,15 @@
 require(dplyr)
 require(vegan)
 require(reshape2)
+require(RColorBrewer)
+require(leaflet)
 
-data <- read.csv("EMBOS_softsubBeach_2.csv", sep = "\t")
+data <- read.csv("EMBOS_softsubBeach_3.csv", sep = "\t")
 env <- read.csv("environs_soft_beach.csv", sep = "\t")
+stations <- data %>%
+  group_by(stationCode) %>%
+  summarise(lat = mean(lat), lon = mean(lon)) %>%
+  arrange(stationCode)
 
 # check station codes
 
@@ -12,7 +18,7 @@ env %>% select(stationCode) %>% distinct()
 
 # check parameters, keep only counts
 
-View(data %>% group_by(WoRMS_scientificName, parameter) %>% summarise(n()))
+View(data %>% group_by(WoRMS_scientificName, parameter) %>% summarise(n = n()))
 data <- data %>% filter(parameter == "Individual Count")
 
 # check sample size
@@ -50,8 +56,6 @@ plot(ord, type = "n")
 points(ord, display = "sites", cex = 0.8, pch = 21, col = "red", bg = "red")
 text(ord, display = "spec", cex = 0.5)
 
-# ordihull, ordiellipse?
-
 # reshape environmental data
 
 env <- env %>%
@@ -60,7 +64,7 @@ env <- env %>%
   dcast(stationCode ~ parameter, value.var = "value") %>%
   arrange(stationCode)
 
-# fit environmental data
+# environmental data: vector and surface fitting
 
 ord.fit <- envfit(ord ~ Salinity, env, na.rm = TRUE)
 
@@ -70,7 +74,25 @@ text(ord, display = "sites", cex = 0.7, col = "red")
 plot(ord.fit)
 with(env, ordisurf(ord, Salinity, add = TRUE, col = "green4"))
 
-# CCA
+# anosim
 
-ord <- cca(data ~ Salinity, env)
-plot(ord)
+# hierarchic clustering
+
+dis <- vegdist(data)
+clus <- hclust(dis)
+plot(clus)
+
+rect.hclust(clus, 5)
+grp <- cutree(clus, 5)
+grp <- grp[order(names(grp))]
+grp
+
+stations$grp <- grp
+stations$color <- brewer.pal(5, "Set1")[stations$grp]
+
+m <- leaflet()
+m <- addProviderTiles(m, "CartoDB.Positron")
+m <- addCircleMarkers(m, data = stations, radius = 5, weight = 0, fillColor = stations$color, fillOpacity = 1)
+m
+
+# biodiversity indices
