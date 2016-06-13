@@ -1,3 +1,4 @@
 **/.DS_Store
 **/.Rhistory
 fixo3/data_embos/*
+!fixo3/data_embos
