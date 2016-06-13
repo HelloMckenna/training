@@ -4,8 +4,8 @@ require(reshape2)
 require(RColorBrewer)
 require(leaflet)
 
-data <- read.csv("EMBOS_softsubBeach_3.csv", sep = "\t")
-env <- read.csv("environs_soft_beach.csv", sep = "\t")
+data <- read.csv("data_embos/EMBOS_softsubBeach_3.csv", sep = "\t")
+env <- read.csv("data_embos/environs_soft_beach.csv", sep = "\t")
 stations <- data %>%
   group_by(stationCode) %>%
   summarise(lat = mean(lat), lon = mean(lon)) %>%

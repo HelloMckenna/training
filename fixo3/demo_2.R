@@ -4,7 +4,7 @@ require(ggplot2)
 require(leaflet)
 require(landr)
 
-data <- read.csv("EMBOS_softsubBeach_Dirty.csv", sep="\t", stringsAsFactors = FALSE, na.strings = "")
+data <- read.csv("data_embos/EMBOS_softsubBeach_Dirty.csv", sep="\t", stringsAsFactors = FALSE, na.strings = "")
 original <- data
 
 # inspect data

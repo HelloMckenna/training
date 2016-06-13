@@ -40,7 +40,7 @@ plot(iris)
 
 # reading CSV files
 
-data <- read.csv("nsbs.csv")
+data <- read.csv("data/nsbs.csv")
 View(data)
 head(data)
 
