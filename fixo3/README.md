@@ -1,6 +1,6 @@
 ## FixO3 training
 
-These files are required as well:
+Add these files in the `data_embos` folder:
 
 - EMBOS_softsubBeach_Dirty.csv
 - EMBOS_softsubBeach_2.csv
