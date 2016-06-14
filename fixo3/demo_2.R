@@ -4,7 +4,7 @@ require(ggplot2)
 require(leaflet)
 require(landr)
 
-data <- read.csv("data_embos/EMBOS_softsubBeach_Dirty.csv", sep="\t", stringsAsFactors = FALSE, na.strings = "")
+data <- read.csv("data_embos/Faulwetter_FixO3_EMBOS_softsubBeach_Dirty.csv", sep="\t", stringsAsFactors = FALSE, na.strings = "")
 original <- data
 
 # inspect data
@@ -67,7 +67,3 @@ m <- addCircleMarkers(m, ~decimalLongitude, ~decimalLatitude, data = stations, r
 m
 
 data <- left_join(data, stations %>% select(decimalLongitude, decimalLatitude, distance), by = c("decimalLongitude", "decimalLatitude"))
-
-#
-
-plot(data$sampledSedimentDepth)

@@ -5,7 +5,7 @@ require(RColorBrewer)
 require(leaflet)
 
 data <- read.csv("data_embos/FixO3_EMBOS_softsubBeach_clean.csv", sep = "\t")
-env <- read.csv("data_embos/environs_soft_beach.csv", sep = "\t")
+env <- read.csv("data_embos/Provoost_FixO3_EMBOS_beach_env.csv", sep = "\t")
 stations <- data %>%
   group_by(stationCode) %>%
   summarise(lat = mean(lat), lon = mean(long)) %>%
