@@ -51,6 +51,8 @@ data$basisOfRecord <- "HumanObservation"
 as.numeric(data$decimalLatitude)
 as.numeric(data$decimalLongitude)
 
+parsedms("1??45'25.678''W")
+
 lat <- parsedms(data$decimalLatitude)$lat
 lon <- parsedms(data$decimalLongitude)$lon
 data$decimalLatitude <- as.numeric(data$decimalLatitude)
@@ -66,6 +68,8 @@ m <- addCircleMarkers(m, ~decimalLongitude, ~decimalLatitude, data = stations, r
 m
 
 # problem: points on land
+
+land(3, 51)
 
 stations$distance <- land(stations$decimalLongitude, stations$decimalLatitude)
 stations$color <- c("green", "red")[(stations$distance > 0.01) + 1]
