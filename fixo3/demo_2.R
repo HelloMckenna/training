@@ -20,7 +20,16 @@ data %>% summarise_each(funs(count_na))
 
 summary(data)
 data %>% summarise_each(funs(min, max))
-hist(data$samplingElevation)
+
+plot(data$samplingElevation)
+plot(data$samplingDepth)
+plot(data$sampledSedimentDepth)
+
+plot(data$samplingElevation, ylim = c(-1, 2))
+points(data$samplingDepth, col = "red")
+
+i <- which(data$samplingElevation < 0)
+data$samplingDepth[i] <- -data$samplingElevation[i]
 
 # problem: field names
 
